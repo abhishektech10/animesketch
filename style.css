@@ -1,279 +1,797 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ani — Anime Sketch Artist</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,400&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-
-  <!-- Scroll progress bar -->
-  <div id="scroll-progress" aria-hidden="true"></div>
-
-  <!-- Custom cursor -->
-  <div id="cursor" aria-hidden="true"></div>
-  <div id="cursor-trail" aria-hidden="true"></div>
-
-  <!-- NAV -->
-  <nav id="navbar" role="navigation" aria-label="Main navigation">
-    <div class="nav-logo">
-      Ani <span>Portfolio</span>
-    </div>
-    <ul class="nav-links" role="list">
-      <li><a href="#home"          class="nav-link active">Home</a></li>
-      <li><a href="#anime-sketch"  class="nav-link">Anime Sketch</a></li>
-      <li><a href="#personal-info" class="nav-link">Personal Info</a></li>
-      <li><a href="#contact"       class="nav-link">Contact</a></li>
-    </ul>
-    <div class="nav-controls">
-      <button id="theme-toggle" aria-label="Toggle dark/light mode">
-        <span class="theme-icon moon"><i class="fa-solid fa-moon"></i></span>
-        <span class="theme-icon sun"><i class="fa-solid fa-sun"></i></span>
-      </button>
-      <div class="hamburger" id="hamburger" role="button" tabindex="0" aria-label="Toggle mobile menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </div>
-    </div>
-  </nav>
-
-  <div class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
-    <a href="#home"          class="mobile-nav-link">Home</a>
-    <a href="#anime-sketch"  class="mobile-nav-link">Anime Sketch</a>
-    <a href="#personal-info" class="mobile-nav-link">Personal Info</a>
-    <a href="#contact"       class="mobile-nav-link">Contact</a>
-  </div>
+/* ============================================================
+   style.css — Ani Portfolio  ·  Sakura Bloom Theme
+   Font    : Montserrat + Cormorant Garamond
+   Palette : Warm light pink — dreamy, soft, anime-inspired
+   Animations: 15+ distinct keyframe animations throughout
+============================================================ */
 
 
-  <!-- HERO -->
-  <section id="home" aria-labelledby="hero-heading">
-    <div class="blob blob-1" aria-hidden="true"></div>
-    <div class="blob blob-2" aria-hidden="true"></div>
-    <div class="blob blob-3" aria-hidden="true"></div>
+/* ============================================================
+   1. CSS CUSTOM PROPERTIES
+============================================================ */
+:root {
+  --pk:         #FF6B9D;   /* hot sakura pink  */
+  --pk-light:   #FFB3CE;   /* soft petal pink  */
+  --pk-pale:    #FFE0EE;   /* barely-pink blush*/
+  --pk-deep:    #E8437A;   /* deep rose        */
+  --gold:       #FF9A5C;   /* warm peach-gold  */
+  --transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
 
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        ✦ Open for Commissions
-      </div>
+[data-theme="light"] {
+  --bg:             #FFF5F9;
+  --bg-secondary:   #FFE8F3;
+  --bg-card:        #FFFFFF;
+  --surface:        #FFF0F6;
+  --border:         rgba(255, 107, 157, 0.2);
+  --border-strong:  rgba(255, 107, 157, 0.45);
+  --text-primary:   #2D1222;
+  --text-secondary: #6B3A55;
+  --text-muted:     #B07090;
+  --nav-bg:         rgba(255, 245, 249, 0.88);
+  --card-shadow:    0 8px 40px rgba(255, 107, 157, 0.14);
+  --glow:           0 0 35px rgba(255, 107, 157, 0.28);
+  --hero-bg:        linear-gradient(135deg, #FFF5F9 0%, #FFE8F3 40%, #FFF0F6 100%);
+}
 
-      <h1 class="hero-name" id="hero-heading">
-        <span class="hero-hello">Hello, I'm</span>
-        <strong class="hero-big-name">Ani</strong>
-      </h1>
-
-      <p class="hero-tagline">
-        <span id="typewriter-text"></span><span class="typewriter" aria-hidden="true"></span>
-      </p>
-
-      <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-num">5+</span>
-          <span class="stat-label">Sketches</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-num">$10</span>
-          <span class="stat-label">Per Sketch</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-num">3–5</span>
-          <span class="stat-label">Day Delivery</span>
-        </div>
-      </div>
-
-      <div class="hero-cta">
-        <a href="#anime-sketch" class="btn-primary">
-          <i class="fa-solid fa-paintbrush"></i>
-          View My Sketches
-          <span class="btn-shimmer"></span>
-        </a>
-        <a href="#contact" class="btn-outline">Commission a Sketch</a>
-      </div>
-    </div>
-
-    <p class="scroll-indicator" aria-hidden="true">
-      <span class="scroll-line"></span>
-      Scroll to explore
-    </p>
-  </section>
-
-  <!-- Wave divider 1 -->
-  <div class="wave-divider" aria-hidden="true">
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path class="wave-path" d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z"/>
-    </svg>
-  </div>
+[data-theme="dark"] {
+  --bg:             #1a0812;
+  --bg-secondary:   #240e1a;
+  --bg-card:        #2e1020;
+  --surface:        #3a1428;
+  --border:         rgba(255, 107, 157, 0.2);
+  --border-strong:  rgba(255, 107, 157, 0.4);
+  --text-primary:   #FFE8F3;
+  --text-secondary: #C084A0;
+  --text-muted:     #7A4560;
+  --nav-bg:         rgba(26, 8, 18, 0.9);
+  --card-shadow:    0 8px 40px rgba(0,0,0,0.5);
+  --glow:           0 0 35px rgba(255, 107, 157, 0.22);
+  --hero-bg:        linear-gradient(135deg, #1a0812 0%, #2a0e1e 50%, #1a0812 100%);
+}
 
 
-  <!-- GALLERY -->
-  <section id="anime-sketch" aria-labelledby="sketch-heading">
-    <div class="sketch-header">
-      <div>
-        <p class="section-label reveal">アニメスケッチ · Anime Sketches</p>
-        <h2 class="section-title reveal" id="sketch-heading">My Sketch <em>Gallery</em></h2>
-      </div>
-      <div class="price-badge reveal">
-        <span class="badge-ring"></span>
-        <i class="fa-solid fa-tag"></i>
-        $10 per sketch
-      </div>
-    </div>
-
-    <div class="sketch-grid" role="list">
-      <article class="sketch-card reveal" role="listitem" style="transition-delay:0s">
-        <img src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/Sketch.1.jpg" alt="Anime sketch 1 by Ani" loading="lazy"/>
-        <div class="sketch-overlay"><div class="sketch-overlay-text"><h4>Original Sketch #1</h4><p>Custom Sketch · $10</p></div></div>
-        <div class="card-shine"></div>
-      </article>
-      <article class="sketch-card reveal" role="listitem" style="transition-delay:0.1s">
-        <img src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/sketch.2.jpg" alt="Anime sketch 2 by Ani" loading="lazy"/>
-        <div class="sketch-overlay"><div class="sketch-overlay-text"><h4>Original Sketch #2</h4><p>Custom Sketch · $10</p></div></div>
-        <div class="card-shine"></div>
-      </article>
-      <article class="sketch-card reveal" role="listitem" style="transition-delay:0.2s">
-        <img src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/sketch.3.jpg" alt="Anime sketch 3 by Ani" loading="lazy"/>
-        <div class="sketch-overlay"><div class="sketch-overlay-text"><h4>Original Sketch #3</h4><p>Custom Sketch · $10</p></div></div>
-        <div class="card-shine"></div>
-      </article>
-      <article class="sketch-card reveal" role="listitem" style="transition-delay:0.3s">
-        <img src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/sketch.4.jpg" alt="Anime sketch 4 by Ani" loading="lazy"/>
-        <div class="sketch-overlay"><div class="sketch-overlay-text"><h4>Original Sketch #4</h4><p>Custom Sketch · $10</p></div></div>
-        <div class="card-shine"></div>
-      </article>
-      <article class="sketch-card reveal" role="listitem" style="transition-delay:0.4s">
-        <img src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/sketch.5.jpg" alt="Anime sketch 5 by Ani" loading="lazy"/>
-        <div class="sketch-overlay"><div class="sketch-overlay-text"><h4>Original Sketch #5</h4><p>Custom Sketch · $10</p></div></div>
-        <div class="card-shine"></div>
-      </article>
-    </div>
-
-    <div class="pricing-note reveal" role="note">
-      <div class="price-big">$10</div>
-      <div>
-        <p><strong>Per Custom Sketch</strong><br>
-        Send a reference or describe your vision — I'll bring your anime character to life with a hand-crafted sketch, delivered digitally within 3–5 days.</p>
-      </div>
-      <div class="pricing-hearts" aria-hidden="true">♥ ♥ ♥</div>
-    </div>
-  </section>
-
-  <!-- Wave divider 2 -->
-  <div class="wave-divider wave-flip" aria-hidden="true">
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path class="wave-path-2" d="M0,40 C360,0 720,80 1080,40 C1260,20 1380,60 1440,40 L1440,0 L0,0 Z"/>
-    </svg>
-  </div>
+/* ============================================================
+   2. RESET & BASE
+============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  transition: background var(--transition), color var(--transition);
+  overflow-x: hidden;
+  cursor: none;
+}
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, var(--pk), var(--pk-light)); border-radius: 3px; }
+img { max-width: 100%; display: block; }
+a   { text-decoration: none; color: inherit; }
+ul  { list-style: none; }
 
 
-  <!-- PERSONAL IMAGE -->
-  <section id="personal-image" aria-label="About Ani">
-    <div class="personal-image-wrapper reveal-left">
-      <div class="orbit orbit-1" aria-hidden="true"></div>
-      <div class="orbit orbit-2" aria-hidden="true"></div>
-      <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=700&q=85" alt="Ani — Anime Sketch Artist from Uttar Pradesh"/>
-      <div class="img-badge"><i class="fa-solid fa-palette"></i> Artist</div>
-    </div>
-
-    <div class="personal-image-text reveal-right">
-      <p class="section-label">の · Meet the Artist</p>
-      <h2 class="section-title">The Face Behind<br>the <em>Sketches</em></h2>
-      <blockquote class="quote">"Every line I draw is a story waiting to be told."</blockquote>
-      <p style="color:var(--text-secondary);line-height:1.9;margin-bottom:1.5rem;font-size:0.95rem;">
-        Ani is a self-taught anime sketch artist from the heart of Uttar Pradesh, India. Inspired by the expressive worlds of classic and modern anime, Ani channels emotion, movement, and story into every hand-drawn piece.
-      </p>
-      <a href="#contact" class="btn-primary" style="display:inline-flex;align-items:center;gap:0.5rem;">
-        <i class="fa-regular fa-envelope"></i> Commission a Sketch
-        <span class="btn-shimmer"></span>
-      </a>
-    </div>
-  </section>
+/* ============================================================
+   3. SCROLL PROGRESS BAR
+============================================================ */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--pk), var(--pk-light), var(--gold));
+  background-size: 200% 100%;
+  z-index: 9999;
+  transition: width 0.1s linear;
+  animation: shimmer-bar 2.5s linear infinite;
+}
+@keyframes shimmer-bar {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
 
 
-  <!-- PERSONAL INFO -->
-  <section id="personal-info" aria-labelledby="info-heading">
-    <div class="section-petal p1" aria-hidden="true">🌸</div>
-    <div class="section-petal p2" aria-hidden="true">🌺</div>
-    <div class="section-petal p3" aria-hidden="true">✿</div>
-
-    <p class="section-label reveal">プロフィール · Profile</p>
-    <h2 class="section-title reveal" id="info-heading">Personal <em>Information</em></h2>
-
-    <div class="info-grid">
-      <div class="reveal-left">
-        <p class="info-bio">Ani is a passionate anime sketch artist from Uttar Pradesh who has been drawing since childhood. Inspired by iconic anime series and a love for Japanese culture, Ani specialises in character portraits, action scenes, and expressive emotional pieces. Every commission is treated with care — Ani works closely with clients to make sure their vision comes to life on paper (and digitally).</p>
-        <h3 class="skills-title">Skills &amp; Interests</h3>
-        <ul class="skills-list" role="list">
-          <li class="skill-tag" style="--si:0">Anime Illustration</li>
-          <li class="skill-tag" style="--si:1">Character Design</li>
-          <li class="skill-tag" style="--si:2">Pencil Sketching</li>
-          <li class="skill-tag" style="--si:3">Digital Coloring</li>
-          <li class="skill-tag" style="--si:4">Manga Paneling</li>
-          <li class="skill-tag" style="--si:5">Portrait Art</li>
-          <li class="skill-tag" style="--si:6">Chibi Style</li>
-          <li class="skill-tag" style="--si:7">Action Poses</li>
-          <li class="skill-tag" style="--si:8">Fan Art</li>
-          <li class="skill-tag" style="--si:9">OC Design</li>
-        </ul>
-      </div>
-
-      <div class="info-details reveal-right">
-        <div class="info-item"><div class="info-item-icon"><i class="fa-solid fa-user"></i></div><div><div class="info-item-label">Name</div><div class="info-item-value">Ani</div></div></div>
-        <div class="info-item"><div class="info-item-icon"><i class="fa-solid fa-location-dot"></i></div><div><div class="info-item-label">Location</div><div class="info-item-value">Uttar Pradesh, India</div></div></div>
-        <div class="info-item"><div class="info-item-icon"><i class="fa-solid fa-palette"></i></div><div><div class="info-item-label">Specialty</div><div class="info-item-value">Anime Sketch Artist</div></div></div>
-        <div class="info-item"><div class="info-item-icon"><i class="fa-solid fa-language"></i></div><div><div class="info-item-label">Languages</div><div class="info-item-value">Hindi · English</div></div></div>
-        <div class="info-item"><div class="info-item-icon"><i class="fa-solid fa-clock"></i></div><div><div class="info-item-label">Delivery Time</div><div class="info-item-value">3–5 Business Days</div></div></div>
-        <div class="info-item"><div class="info-item-icon"><i class="fa-solid fa-star"></i></div><div><div class="info-item-label">Commission Status</div><div class="info-item-value open-badge">Open for Commissions ✦</div></div></div>
-      </div>
-    </div>
-  </section>
+/* ============================================================
+   4. CUSTOM CURSOR
+============================================================ */
+#cursor {
+  position: fixed;
+  width: 16px; height: 16px;
+  background: var(--pk);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s, opacity 0.3s;
+  mix-blend-mode: multiply;
+  box-shadow: 0 0 12px var(--pk);
+}
+#cursor-trail {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 2px solid var(--pk-light);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.25s ease, opacity 0.3s;
+  opacity: 0.6;
+}
+[data-theme="dark"] #cursor { mix-blend-mode: normal; }
 
 
-  <!-- CONTACT -->
-  <section id="contact" aria-labelledby="contact-heading">
-    <p class="section-label reveal">お問い合わせ · Get in Touch</p>
-    <h2 class="section-title reveal" id="contact-heading">Commission a <em>Custom Sketch</em></h2>
+/* ============================================================
+   5. NAVIGATION
+============================================================ */
+#navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%; height: 70px;
+  background: var(--nav-bg);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition), box-shadow var(--transition);
+}
+#navbar.scrolled { box-shadow: 0 4px 30px rgba(255, 107, 157, 0.15); }
 
-    <div class="contact-grid">
-      <div class="reveal-left">
-        <p style="color:var(--text-secondary);line-height:1.9;margin-bottom:2rem;font-size:0.95rem;">Want a custom anime sketch? Drop me a message describing your idea — a character, scene, style reference, or even a photo. I'll get back to you within 24 hours.</p>
-        <p style="color:var(--text-secondary);font-size:0.72rem;margin-bottom:1.2rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">Find me on</p>
-        <nav class="social-links" aria-label="Social media links">
-          <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i> @ani.sketches</a>
-          <a href="#" class="social-link"><i class="fa-brands fa-x-twitter"></i> @ani_artworld</a>
-          <a href="https://github.com/abhishektech04/animesketch" class="social-link" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> abhishektech04/animesketch</a>
-          <a href="mailto:ani@sketchart.in" class="social-link"><i class="fa-regular fa-envelope"></i> ani@sketchart.in</a>
-        </nav>
-      </div>
+.nav-logo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem; font-weight: 800;
+  color: var(--pk); letter-spacing: 0.04em;
+  animation: logo-pulse 3s ease-in-out infinite;
+}
+@keyframes logo-pulse {
+  0%,100% { text-shadow: 0 0 0px var(--pk); }
+  50%      { text-shadow: 0 0 18px rgba(255,107,157,0.5); }
+}
+.nav-logo span { color: var(--text-primary); font-weight: 300; margin-left: 0.3rem; }
 
-      <div class="reveal-right">
-        <form class="contact-form" id="contact-form" novalidate>
-          <div class="form-row">
-            <div class="form-group"><label for="name">Your Name</label><input type="text" id="name" name="name" placeholder="Yuki Tanaka" required/></div>
-            <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" placeholder="yuki@example.com" required/></div>
-          </div>
-          <div class="form-group"><label for="subject">Subject</label><input type="text" id="subject" name="subject" placeholder="Custom anime character sketch"/></div>
-          <div class="form-group"><label for="message">Describe Your Vision</label><textarea id="message" name="message" placeholder="Tell me about the character, style, pose, mood — the more detail the better! ✨" required></textarea></div>
-          <div class="form-success" id="form-success" role="alert"><i class="fa-solid fa-circle-check"></i> Message sent! I'll reply within 24 hours. ✨</div>
-          <button type="submit" class="btn-submit"><i class="fa-solid fa-paper-plane"></i> Send Message <span class="btn-shimmer"></span></button>
-        </form>
-      </div>
-    </div>
-  </section>
+.nav-links { display: flex; align-items: center; gap: 2.5rem; }
+.nav-links a {
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text-secondary);
+  position: relative; transition: color var(--transition);
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 2px;
+  background: linear-gradient(90deg, var(--pk), var(--pk-light));
+  border-radius: 2px;
+  transition: width 0.35s cubic-bezier(0.25,0.8,0.25,1);
+}
+.nav-links a:hover, .nav-links a.active { color: var(--pk); }
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+.nav-controls { display: flex; align-items: center; gap: 1rem; }
+
+#theme-toggle {
+  width: 44px; height: 24px;
+  background: var(--surface);
+  border: 1.5px solid var(--border); border-radius: 12px;
+  cursor: pointer; position: relative;
+  transition: background var(--transition);
+}
+#theme-toggle::before {
+  content: '';
+  position: absolute; top: 2px; left: 2px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--pk), var(--gold));
+  transition: transform var(--transition);
+  box-shadow: 0 2px 8px rgba(255,107,157,0.4);
+}
+[data-theme="dark"] #theme-toggle::before { transform: translateX(20px); }
+
+.theme-icon { position: absolute; top: 50%; transform: translateY(-50%); font-size: 0.6rem; pointer-events: none; }
+.theme-icon.moon { left: 5px; color: var(--text-muted); }
+.theme-icon.sun  { right: 5px; color: var(--gold); }
+
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: var(--transition); }
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+.mobile-nav {
+  display: none; position: fixed; top: 70px; left: 0; right: 0;
+  background: var(--nav-bg); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 5%; flex-direction: column; gap: 1.2rem; z-index: 999;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a { font-size: 1rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); transition: color var(--transition); }
+.mobile-nav a:hover { color: var(--pk); }
 
 
-  <!-- FOOTER -->
-  <footer>
-    <span class="footer-logo">Ani ✦</span>
-    <p>© 2025 Ani — Anime Sketch Artist · Uttar Pradesh, India</p>
-    <p>Crafted with <span class="heart-beat">♥</span></p>
-  </footer>
+/* ============================================================
+   6. SECTION SHARED
+============================================================ */
+section { padding: 100px 5%; }
 
-  <script src="script.js" defer></script>
-</body>
-</html>
+.section-label {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--pk); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.section-label::after {
+  content: ''; flex: 1; max-width: 60px; height: 1px;
+  background: linear-gradient(90deg, var(--pk), transparent); opacity: 0.7;
+}
+
+.section-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(2rem,5vw,3.2rem); font-weight: 800;
+  line-height: 1.1; margin-bottom: 1.5rem;
+  color: var(--text-primary); letter-spacing: -0.02em;
+}
+.section-title em {
+  font-style: italic; font-weight: 300;
+  color: var(--pk);
+  font-family: 'Cormorant Garamond', serif; font-size: 1.1em;
+}
+
+/* Reveal animations */
+.reveal         { opacity: 0; transform: translateY(40px); transition: opacity 0.85s cubic-bezier(0.25,0.8,0.25,1), transform 0.85s cubic-bezier(0.25,0.8,0.25,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left         { opacity: 0; transform: translateX(-55px); transition: opacity 0.85s ease, transform 0.85s ease; }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right         { opacity: 0; transform: translateX(55px); transition: opacity 0.85s ease, transform 0.85s ease; }
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+
+/* ============================================================
+   7. HERO SECTION
+============================================================ */
+#home {
+  min-height: 100vh; display: flex; align-items: center;
+  background: var(--hero-bg); position: relative; overflow: hidden; padding-top: 70px;
+}
+
+/* Animated mesh blobs */
+.blob {
+  position: absolute; border-radius: 50%; filter: blur(80px);
+  pointer-events: none; opacity: 0.5;
+}
+.blob-1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, #FFB3CE 0%, transparent 70%);
+  top: -100px; right: -100px;
+  animation: blob-drift1 10s ease-in-out infinite;
+}
+.blob-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, #FF6B9D 0%, transparent 70%);
+  bottom: -80px; left: -80px;
+  animation: blob-drift2 13s ease-in-out infinite;
+}
+.blob-3 {
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, #FFD6E7 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  animation: blob-drift3 8s ease-in-out infinite;
+}
+@keyframes blob-drift1 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-40px,30px) scale(1.12);} }
+@keyframes blob-drift2 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(50px,-30px) scale(1.08);} }
+@keyframes blob-drift3 { 0%,100%{transform:translate(-50%,-50%) scale(1);} 50%{transform:translate(-50%,-50%) scale(1.15);} }
+
+/* Floating sakura petals (JS-spawned) */
+.petal {
+  position: absolute;
+  opacity: 0;
+  animation: petal-fall linear infinite;
+  pointer-events: none;
+  font-size: 18px;
+}
+@keyframes petal-fall {
+  0%   { transform: translateY(-30px) rotate(0deg)   translateX(0);   opacity: 0;    }
+  10%  { opacity: 0.8; }
+  90%  { opacity: 0.5; }
+  100% { transform: translateY(105vh) rotate(720deg) translateX(60px); opacity: 0;    }
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 700px; }
+
+/* Open badge */
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--pk-pale); border: 1px solid var(--border-strong);
+  border-radius: 50px; padding: 0.4rem 1rem;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: var(--pk);
+  margin-bottom: 1.5rem;
+  opacity: 0; animation: fade-up 0.6s 0.2s forwards;
+}
+.badge-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: #4ADE80;
+  box-shadow: 0 0 8px #4ADE80;
+  animation: dot-pulse 1.5s ease-in-out infinite;
+}
+@keyframes dot-pulse { 0%,100%{ box-shadow:0 0 4px #4ADE80; } 50%{ box-shadow:0 0 14px #4ADE80; } }
+
+.hero-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(3rem,10vw,6.5rem); font-weight: 800;
+  line-height: 1; margin-bottom: 0.8rem;
+  letter-spacing: -0.03em;
+  opacity: 0; animation: fade-up 0.8s 0.4s forwards;
+}
+.hero-hello { display: block; font-size: 0.32em; font-weight: 400; color: var(--text-secondary); margin-bottom: 0.3rem; letter-spacing: 0.05em; }
+.hero-big-name {
+  display: block; color: var(--pk);
+  background: linear-gradient(135deg, var(--pk-deep) 0%, var(--pk) 40%, var(--pk-light) 70%, var(--pk) 100%);
+  background-size: 300% 100%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: name-shimmer 4s linear infinite;
+}
+@keyframes name-shimmer { 0%{background-position:0% 0} 100%{background-position:300% 0} }
+
+.hero-tagline {
+  font-size: clamp(0.9rem,2.2vw,1.1rem); font-weight: 400;
+  color: var(--text-secondary); line-height: 1.8; max-width: 500px; margin-bottom: 2rem;
+  opacity: 0; animation: fade-up 0.8s 0.6s forwards;
+}
+
+.typewriter { border-right: 2px solid var(--pk); padding-right: 2px; animation: blink 0.8s step-end infinite; }
+@keyframes blink { 0%,100%{border-color:var(--pk);} 50%{border-color:transparent;} }
+
+/* Stats row */
+.hero-stats {
+  display: flex; align-items: center; gap: 1.5rem;
+  margin-bottom: 2.2rem;
+  opacity: 0; animation: fade-up 0.8s 0.75s forwards;
+}
+.stat-item { text-align: center; }
+.stat-num {
+  display: block; font-size: 1.5rem; font-weight: 800; color: var(--pk);
+  animation: count-bounce 2s ease-in-out infinite alternate;
+}
+@keyframes count-bounce { 0%{transform:translateY(0);} 100%{transform:translateY(-4px);} }
+.stat-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+.stat-divider { width: 1px; height: 30px; background: var(--border-strong); }
+
+/* CTA buttons */
+.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fade-up 0.8s 0.9s forwards; }
+
+.btn-primary {
+  position: relative; overflow: hidden;
+  padding: 0.9rem 2rem;
+  background: linear-gradient(135deg, var(--pk), var(--pk-deep));
+  color: #fff; border: none; border-radius: 50px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 4px 20px rgba(255,107,157,0.4);
+  display: inline-flex; align-items: center; gap: 0.5rem;
+}
+.btn-primary:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 10px 35px rgba(255,107,157,0.55); }
+
+/* Shimmer sweep on buttons */
+.btn-shimmer {
+  position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  transform: skewX(-20deg);
+  animation: btn-sweep 3s ease-in-out infinite 1.5s;
+}
+@keyframes btn-sweep { 0%,80%,100%{left:-100%;} 50%{left:150%;} }
+
+.btn-outline {
+  padding: 0.9rem 2rem;
+  background: transparent; color: var(--pk);
+  border: 2px solid var(--border-strong); border-radius: 50px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), transform var(--transition), border-color var(--transition);
+}
+.btn-outline:hover { background: var(--pk-pale); border-color: var(--pk); transform: translateY(-3px); }
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute; bottom: 2.5rem; left: 5%;
+  display: flex; align-items: center; gap: 0.8rem;
+  font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--text-muted);
+  opacity: 0; animation: fade-up 0.8s 1.2s forwards;
+}
+.scroll-line { width: 40px; height: 1px; background: var(--pk-light); position: relative; overflow: hidden; }
+.scroll-line::after {
+  content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, var(--pk), var(--gold));
+  animation: slide-line 2s ease-in-out infinite;
+}
+@keyframes slide-line { 0%,100%{left:-100%;} 50%{left:100%;} }
+
+@keyframes fade-up { from{opacity:0;transform:translateY(22px);} to{opacity:1;transform:translateY(0);} }
+
+
+/* ============================================================
+   8. WAVE DIVIDERS
+============================================================ */
+.wave-divider { line-height: 0; overflow: hidden; }
+.wave-divider svg { display: block; width: 100%; height: 80px; }
+.wave-path  { fill: var(--bg-secondary); }
+.wave-path-2{ fill: var(--bg); }
+.wave-flip  { transform: scaleY(-1); }
+
+
+/* ============================================================
+   9. GALLERY SECTION
+============================================================ */
+#anime-sketch { background: var(--bg-secondary); position: relative; overflow: hidden; }
+
+.sketch-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem;
+}
+
+/* Pulsing price badge with rotating ring */
+.price-badge {
+  position: relative; display: inline-flex; align-items: center; gap: 0.5rem;
+  background: linear-gradient(135deg, var(--pk), var(--pk-deep));
+  color: #fff; padding: 0.65rem 1.5rem; border-radius: 50px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em;
+  box-shadow: 0 4px 20px rgba(255,107,157,0.4);
+  animation: badge-heartbeat 1.8s ease-in-out infinite;
+}
+@keyframes badge-heartbeat { 0%,100%{transform:scale(1); box-shadow:0 4px 20px rgba(255,107,157,0.4);} 30%{transform:scale(1.06); box-shadow:0 6px 30px rgba(255,107,157,0.6);} }
+
+.badge-ring {
+  position: absolute; inset: -4px; border-radius: 50px;
+  border: 2px solid transparent;
+  background: linear-gradient(var(--bg-secondary),var(--bg-secondary)) padding-box,
+              linear-gradient(90deg, var(--pk), var(--pk-light), var(--gold), var(--pk)) border-box;
+  background-size: 300%;
+  animation: ring-rotate 3s linear infinite;
+}
+@keyframes ring-rotate { 0%{background-position:0%} 100%{background-position:300%} }
+
+/* 3-col grid */
+.sketch-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+.sketch-card:nth-child(4) { grid-column: 1; }
+.sketch-card:nth-child(5) { grid-column: 2; }
+
+@media(max-width:860px){
+  .sketch-grid{grid-template-columns:repeat(2,1fr);}
+  .sketch-card:nth-child(4),.sketch-card:nth-child(5){grid-column:auto;}
+}
+
+.sketch-card {
+  position: relative; border-radius: 16px; overflow: hidden;
+  background: var(--bg-card); box-shadow: var(--card-shadow);
+  cursor: pointer; aspect-ratio: 3/4;
+  border: 1px solid var(--border);
+  transition: transform 0.5s cubic-bezier(0.25,0.8,0.25,1), box-shadow 0.5s ease, border-color 0.3s;
+}
+.sketch-card:hover {
+  transform: translateY(-14px) scale(1.03) rotateZ(0.5deg);
+  box-shadow: var(--glow), var(--card-shadow);
+  border-color: var(--pk);
+}
+
+.sketch-card img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.7s ease, filter 0.5s ease;
+  filter: saturate(0.9);
+}
+.sketch-card:hover img { transform: scale(1.1); filter: saturate(1.15); }
+
+/* Hover overlay */
+.sketch-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(45,18,34,0.88) 0%, rgba(255,107,157,0.1) 60%, transparent 100%);
+  opacity: 0; transition: opacity 0.45s ease;
+  display: flex; align-items: flex-end; padding: 1.5rem;
+}
+.sketch-card:hover .sketch-overlay { opacity: 1; }
+.sketch-overlay-text { color: #fff; transform: translateY(12px); transition: transform 0.45s ease; }
+.sketch-card:hover .sketch-overlay-text { transform: translateY(0); }
+.sketch-overlay-text h4 { font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
+.sketch-overlay-text p  { font-size: 0.75rem; color: var(--pk-light); font-weight: 600; letter-spacing: 0.1em; }
+
+/* Shine sweep on card hover */
+.card-shine {
+  position: absolute; inset: 0;
+  background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.18) 50%, transparent 60%);
+  background-size: 200% 200%; background-position: 200% 0;
+  transition: background-position 0.6s ease;
+  pointer-events: none;
+}
+.sketch-card:hover .card-shine { background-position: -50% 0; }
+
+/* Pricing note */
+.pricing-note {
+  margin-top: 2.5rem; padding: 1.5rem 2rem;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-left: 4px solid var(--pk); border-radius: 14px;
+  display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+  animation: float-gentle 4s ease-in-out infinite;
+}
+@keyframes float-gentle { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-5px);} }
+
+.pricing-note .price-big {
+  font-family: 'Montserrat', sans-serif; font-size: 2.5rem; font-weight: 800;
+  background: linear-gradient(135deg, var(--pk-deep), var(--pk), var(--gold));
+  background-size: 200%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: price-shimmer 3s linear infinite;
+}
+@keyframes price-shimmer { 0%{background-position:0%} 100%{background-position:200%} }
+
+.pricing-note p { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.7; }
+.pricing-note p strong { color: var(--text-primary); font-weight: 700; }
+
+.pricing-hearts {
+  margin-left: auto; font-size: 1.2rem; color: var(--pk);
+  animation: hearts-dance 1.5s ease-in-out infinite;
+  letter-spacing: 0.3em;
+}
+@keyframes hearts-dance { 0%,100%{transform:scale(1);} 50%{transform:scale(1.2);} }
+
+
+/* ============================================================
+   10. PERSONAL IMAGE SECTION
+============================================================ */
+#personal-image {
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  gap: 5%; flex-wrap: wrap;
+}
+
+.personal-image-wrapper { position: relative; flex-shrink: 0; }
+
+/* Orbiting rings */
+.orbit {
+  position: absolute; border-radius: 50%;
+  border: 1.5px solid var(--border-strong);
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  pointer-events: none;
+}
+.orbit-1 { width: calc(100% + 40px); height: calc(100% + 40px); animation: orbit-spin 12s linear infinite; border-style: dashed; border-color: rgba(255,107,157,0.25); }
+.orbit-2 { width: calc(100% + 80px); height: calc(100% + 80px); animation: orbit-spin 20s linear infinite reverse; border-color: rgba(255,107,157,0.12); }
+@keyframes orbit-spin { 0%{transform:translate(-50%,-50%) rotate(0deg);} 100%{transform:translate(-50%,-50%) rotate(360deg);} }
+
+.personal-image-wrapper img {
+  width: min(320px,85vw); height: min(400px,100vw);
+  object-fit: cover; border-radius: 20px; position: relative; z-index: 1;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.5s ease, filter 0.5s ease;
+  filter: saturate(0.95);
+}
+.personal-image-wrapper:hover img { transform: scale(1.03); filter: saturate(1.15); }
+
+/* Floating badge on image */
+.img-badge {
+  position: absolute; bottom: 20px; right: -16px; z-index: 2;
+  background: linear-gradient(135deg, var(--pk), var(--pk-deep));
+  color: #fff; padding: 0.5rem 1rem; border-radius: 50px;
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
+  box-shadow: 0 4px 18px rgba(255,107,157,0.45);
+  animation: badge-bounce 2.5s ease-in-out infinite;
+  display: flex; align-items: center; gap: 0.4rem;
+}
+@keyframes badge-bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-6px);} }
+
+.personal-image-text { max-width: 460px; }
+.quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; font-style: italic; color: var(--pk);
+  line-height: 1.5; margin-bottom: 1.5rem;
+  position: relative; padding-left: 1.5rem;
+  animation: quote-glow 3s ease-in-out infinite;
+}
+@keyframes quote-glow { 0%,100%{text-shadow:none;} 50%{text-shadow:0 0 20px rgba(255,107,157,0.3);} }
+.quote::before {
+  content: '\201C'; position: absolute; left: 0; top: -0.3rem;
+  font-size: 3rem; color: var(--pk); opacity: 0.25; font-family: 'Cormorant Garamond', serif; line-height: 1;
+}
+
+
+/* ============================================================
+   11. PERSONAL INFO SECTION
+============================================================ */
+#personal-info { background: var(--bg-secondary); position: relative; overflow: hidden; }
+
+/* Floating emoji petals in section */
+.section-petal {
+  position: absolute; font-size: 2rem; pointer-events: none;
+  opacity: 0.18; animation: section-float linear infinite;
+}
+.p1 { left: 5%;  top: 20%; animation-duration: 8s;  animation-delay: 0s; }
+.p2 { right: 8%; top: 50%; animation-duration: 11s; animation-delay: 3s; }
+.p3 { left: 80%; top: 70%; animation-duration: 9s;  animation-delay: 1.5s; }
+@keyframes section-float {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0.12; }
+  50%  { transform: translateY(-30px) rotate(180deg); opacity: 0.25; }
+  100% { transform: translateY(0) rotate(360deg); opacity: 0.12; }
+}
+
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.info-bio { font-size: 0.95rem; color: var(--text-secondary); line-height: 2; margin-bottom: 1.5rem; }
+
+.skills-title {
+  font-family: 'Montserrat', sans-serif; font-size: 0.78rem; font-weight: 800;
+  color: var(--pk); text-transform: uppercase; letter-spacing: 0.15em;
+  margin: 2rem 0 1rem;
+}
+.skills-list { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+/* Skill tags with staggered pop-in (CSS) */
+.skill-tag {
+  padding: 0.45rem 1rem;
+  background: var(--bg-card); border: 1.5px solid var(--border); border-radius: 50px;
+  font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 700;
+  color: var(--text-secondary); letter-spacing: 0.06em; text-transform: uppercase;
+  transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  animation: tag-pop-in 0.5s calc(var(--si, 0) * 0.07s) both;
+}
+@keyframes tag-pop-in { 0%{opacity:0;transform:scale(0.6);} 70%{transform:scale(1.12);} 100%{opacity:1;transform:scale(1);} }
+.skill-tag:hover {
+  background: linear-gradient(135deg, var(--pk), var(--pk-deep)); color: #fff;
+  border-color: var(--pk); transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 6px 18px rgba(255,107,157,0.35);
+}
+
+/* Info detail rows */
+.info-details { display: flex; flex-direction: column; gap: 0.9rem; }
+.info-item {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.9rem 1.2rem; background: var(--bg-card);
+  border-radius: 12px; border: 1.5px solid var(--border);
+  transition: border-color 0.35s, transform 0.35s, box-shadow 0.35s;
+  position: relative; overflow: hidden;
+}
+.info-item::after {
+  content: ''; position: absolute; left: 0; top: 0;
+  width: 0%; height: 100%;
+  background: linear-gradient(90deg, rgba(255,179,206,0.15), transparent);
+  transition: width 0.4s ease;
+}
+.info-item:hover { border-color: var(--pk); transform: translateX(8px); box-shadow: var(--glow); }
+.info-item:hover::after { width: 100%; }
+
+.info-item-icon {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: var(--pk-pale); display: flex; align-items: center; justify-content: center;
+  color: var(--pk); font-size: 0.9rem; flex-shrink: 0;
+  transition: background 0.3s, transform 0.3s;
+}
+.info-item:hover .info-item-icon { background: var(--pk); color: #fff; transform: rotate(10deg) scale(1.1); }
+
+.info-item-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.12rem; font-weight: 600; }
+.info-item-value { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); }
+
+.open-badge {
+  background: linear-gradient(135deg, var(--pk), var(--gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  background-size: 200%;
+  animation: open-badge-shimmer 2.5s linear infinite;
+}
+@keyframes open-badge-shimmer { 0%{background-position:0%} 100%{background-position:200%} }
+
+
+/* ============================================================
+   12. CONTACT SECTION
+============================================================ */
+#contact { background: var(--bg); position: relative; overflow: hidden; }
+#contact::before {
+  content: ''; position: absolute; right: -8%; bottom: -15%;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,107,157,0.08), transparent 70%);
+  animation: blob-drift1 12s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; align-items: start; }
+
+.social-links { display: flex; flex-direction: column; gap: 0.8rem; }
+.social-link {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.8rem 1rem; border-radius: 12px;
+  border: 1.5px solid var(--border); background: var(--bg-card);
+  color: var(--text-secondary); font-size: 0.8rem; font-weight: 600;
+  transition: border-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s, background 0.3s;
+}
+.social-link i { width: 22px; text-align: center; font-size: 1rem; transition: transform 0.3s; }
+.social-link:hover {
+  border-color: var(--pk); color: var(--pk); transform: translateX(8px);
+  background: var(--pk-pale); box-shadow: var(--glow);
+}
+.social-link:hover i { transform: scale(1.25) rotate(-8deg); }
+
+/* Form */
+.contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-group label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+
+.form-group input,
+.form-group textarea {
+  background: var(--bg-card); border: 1.5px solid var(--border);
+  border-radius: 10px; padding: 0.85rem 1rem;
+  color: var(--text-primary); font-family: 'Montserrat', sans-serif; font-size: 0.88rem;
+  outline: none; resize: none;
+  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--pk); background: var(--surface);
+  box-shadow: 0 0 0 4px rgba(255,107,157,0.12), 0 0 20px rgba(255,107,157,0.15);
+}
+.form-group textarea { min-height: 130px; }
+
+.btn-submit {
+  position: relative; overflow: hidden;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, var(--pk), var(--pk-deep));
+  color: #fff; border: none; border-radius: 50px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  cursor: pointer; align-self: flex-start;
+  transition: transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 4px 20px rgba(255,107,157,0.4);
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.btn-submit:hover { transform: translateY(-3px); box-shadow: 0 10px 35px rgba(255,107,157,0.55); }
+.btn-submit:active { transform: scale(0.97); }
+
+.form-success {
+  display: none; padding: 1rem 1.5rem;
+  background: rgba(255,107,157,0.08); border: 1px solid rgba(255,107,157,0.3);
+  border-radius: 10px; color: var(--pk); font-size: 0.88rem;
+  align-items: center; gap: 0.6rem;
+}
+.form-success.show { display: flex; animation: success-pop 0.4s cubic-bezier(0.25,0.8,0.25,1); }
+@keyframes success-pop { 0%{transform:scale(0.8);opacity:0;} 100%{transform:scale(1);opacity:1;} }
+
+
+/* ============================================================
+   13. FOOTER
+============================================================ */
+footer {
+  padding: 2rem 5%; border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1rem; background: var(--bg-secondary);
+}
+footer p { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.05em; }
+
+.footer-logo {
+  font-family: 'Montserrat', sans-serif; font-size: 1.2rem; font-weight: 800;
+  background: linear-gradient(135deg, var(--pk-deep), var(--pk), var(--gold), var(--pk));
+  background-size: 300%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: footer-shimmer 4s linear infinite;
+}
+@keyframes footer-shimmer { 0%{background-position:0%} 100%{background-position:300%} }
+
+.heart-beat {
+  display: inline-block; color: var(--pk);
+  animation: heartbeat 1.3s ease-in-out infinite;
+}
+@keyframes heartbeat { 0%,100%{transform:scale(1);} 14%{transform:scale(1.3);} 28%{transform:scale(1);} 42%{transform:scale(1.2);} 56%{transform:scale(1);} }
+
+
+/* ============================================================
+   14. RESPONSIVE
+============================================================ */
+@media(max-width:900px){
+  .info-grid    { grid-template-columns:1fr; }
+  .contact-grid { grid-template-columns:1fr; gap:2.5rem; }
+  .nav-links    { display:none; }
+  .hamburger    { display:flex; }
+}
+@media(max-width:600px){
+  section              { padding:80px 5%; }
+  .form-row            { grid-template-columns:1fr; }
+  .hero-cta            { flex-direction:column; }
+  .btn-primary,.btn-outline { width:100%; justify-content:center; }
+  .sketch-grid         { grid-template-columns:repeat(2,1fr); gap:1rem; }
+  #personal-image      { flex-direction:column; text-align:center; }
+  .quote               { padding-left:0; }
+  .quote::before       { display:none; }
+  .hero-stats          { gap:1rem; }
+}
