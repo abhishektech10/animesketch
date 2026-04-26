@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ani — Anime Sketch Artist</title>
+
+  <!-- ── Google Fonts ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,400&family=Noto+Serif+JP:wght@300;400&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ── Font Awesome (icons) ── -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+
+  <!-- ── Portfolio Styles ── -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION BAR
+  ============================================================ -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+
+    <!-- Logo -->
+    <div class="nav-logo">
+      Ani <span>Portfolio</span>
+    </div>
+
+    <!-- Desktop links -->
+    <ul class="nav-links" role="list">
+      <li><a href="#home"          class="nav-link active">Home</a></li>
+      <li><a href="#anime-sketch"  class="nav-link">Anime Sketch</a></li>
+      <li><a href="#personal-info" class="nav-link">Personal Info</a></li>
+      <li><a href="#contact"       class="nav-link">Contact</a></li>
+    </ul>
+
+    <!-- Theme toggle + hamburger -->
+    <div class="nav-controls">
+
+      <!-- Dark / Light mode toggle -->
+      <button id="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle theme">
+        <span class="theme-icon moon"><i class="fa-solid fa-moon"></i></span>
+        <span class="theme-icon sun"><i class="fa-solid fa-sun"></i></span>
+      </button>
+
+      <!-- Hamburger (mobile only) -->
+      <div
+        class="hamburger"
+        id="hamburger"
+        role="button"
+        tabindex="0"
+        aria-label="Toggle mobile menu"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Mobile nav drawer -->
+  <div class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+    <a href="#home"          class="mobile-nav-link">Home</a>
+    <a href="#anime-sketch"  class="mobile-nav-link">Anime Sketch</a>
+    <a href="#personal-info" class="mobile-nav-link">Personal Info</a>
+    <a href="#contact"       class="mobile-nav-link">Contact</a>
+  </div>
+
+
+  <!-- ============================================================
+       HERO SECTION
+  ============================================================ -->
+  <section id="home" aria-labelledby="hero-heading">
+
+    <!-- Decorative grid lines (CSS) -->
+    <div class="hero-grid" aria-hidden="true"></div>
+
+    <!-- Floating particles are injected here by script.js -->
+
+    <div class="hero-content">
+      <p class="hero-greeting">✦ Welcome to my world</p>
+
+      <h1 class="hero-name" id="hero-heading">
+        Hello, I'm<br>
+        <strong>Ani</strong>
+      </h1>
+
+      <p class="hero-tagline">
+        <span id="typewriter-text"></span><span class="typewriter" aria-hidden="true"></span>
+      </p>
+
+      <div class="hero-cta">
+        <a href="#anime-sketch" class="btn-primary">
+          <i class="fa-solid fa-paintbrush" style="margin-right:0.4rem"></i>
+          View My Sketches
+        </a>
+        <a href="#contact" class="btn-outline">Commission a Sketch</a>
+      </div>
+    </div>
+
+    <!-- Animated scroll hint -->
+    <p class="scroll-indicator" aria-hidden="true">
+      <span class="scroll-line"></span>
+      Scroll to explore
+    </p>
+
+  </section>
+
+
+  <!-- ============================================================
+       ANIME SKETCH GALLERY SECTION
+  ============================================================ -->
+  <section id="anime-sketch" aria-labelledby="sketch-heading">
+
+    <!-- Section header + floating price badge -->
+    <div class="sketch-header">
+      <div>
+        <p class="section-label reveal">アニメスケッチ · Anime Sketches</p>
+        <h2 class="section-title reveal" id="sketch-heading">
+          My Sketch <em>Gallery</em>
+        </h2>
+      </div>
+      <div class="price-badge reveal" aria-label="Price: $10 per sketch">
+        <i class="fa-solid fa-tag"></i>
+        $10 per sketch
+      </div>
+    </div>
+
+    <!-- 5-card gallery grid -->
+    <div class="sketch-grid" role="list">
+
+      <!-- Card 1 -->
+      <article class="sketch-card reveal" role="listitem" style="transition-delay:0s">
+        <img
+          src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/Sketch.1.jpg"
+          alt="Anime sketch 1 by Ani"
+          loading="lazy"
+        />
+        <div class="sketch-overlay" aria-hidden="true">
+          <div class="sketch-overlay-text">
+            <h4>Original Sketch #1</h4>
+            <p>Custom Sketch · $10</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="sketch-card reveal" role="listitem" style="transition-delay:0.08s">
+        <img
+          src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/sketch.2.jpg"
+          alt="Anime sketch 2 by Ani"
+          loading="lazy"
+        />
+        <div class="sketch-overlay" aria-hidden="true">
+          <div class="sketch-overlay-text">
+            <h4>Original Sketch #2</h4>
+            <p>Custom Sketch · $10</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="sketch-card reveal" role="listitem" style="transition-delay:0.16s">
+        <img
+          src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/sketch.3.jpg"
+          alt="Anime sketch 3 by Ani"
+          loading="lazy"
+        />
+        <div class="sketch-overlay" aria-hidden="true">
+          <div class="sketch-overlay-text">
+            <h4>Original Sketch #3</h4>
+            <p>Custom Sketch · $10</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="sketch-card reveal" role="listitem" style="transition-delay:0.24s">
+        <img
+          src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/sketch.4.jpg"
+          alt="Anime sketch 4 by Ani"
+          loading="lazy"
+        />
+        <div class="sketch-overlay" aria-hidden="true">
+          <div class="sketch-overlay-text">
+            <h4>Original Sketch #4</h4>
+            <p>Custom Sketch · $10</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="sketch-card reveal" role="listitem" style="transition-delay:0.32s">
+        <img
+          src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/sketch.5.jpg"
+          alt="Anime sketch 5 by Ani"
+          loading="lazy"
+        />
+        <div class="sketch-overlay" aria-hidden="true">
+          <div class="sketch-overlay-text">
+            <h4>Original Sketch #5</h4>
+            <p>Custom Sketch · $10</p>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /.sketch-grid -->
+
+    <!-- Pricing callout strip -->
+    <div class="pricing-note reveal" role="note">
+      <div class="price-big" aria-label="Ten dollars">$10</div>
+      <div>
+        <p>
+          <strong>Per Custom Sketch</strong><br>
+          Send a reference or describe your vision — I'll bring your anime
+          character to life with a hand-crafted sketch, delivered digitally
+          within 3–5 days.
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       PERSONAL IMAGE SECTION
+  ============================================================ -->
+  <section id="personal-image" aria-label="About Ani">
+
+    <!-- Artist photo with decorative double frame -->
+    <div class="personal-image-wrapper reveal-left">
+      <img
+        src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=700&q=85"
+        alt="Ani — Anime Sketch Artist from Uttar Pradesh"
+      />
+    </div>
+
+    <!-- Artist intro text -->
+    <div class="personal-image-text reveal-right">
+      <p class="section-label">の · Meet the Artist</p>
+      <h2 class="section-title">
+        The Face Behind<br>the <em>Sketches</em>
+      </h2>
+      <blockquote class="quote">
+        "Every line I draw is a story waiting to be told."
+      </blockquote>
+      <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:1.5rem;font-size:0.95rem;">
+        Ani is a self-taught anime sketch artist from the heart of Uttar Pradesh,
+        India. Inspired by the expressive worlds of classic and modern anime, Ani
+        channels emotion, movement, and story into every hand-drawn piece.
+      </p>
+      <a
+        href="#contact"
+        class="btn-primary"
+        style="display:inline-flex;align-items:center;gap:0.5rem;"
+      >
+        <i class="fa-regular fa-envelope"></i> Commission a Sketch
+      </a>
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       PERSONAL INFORMATION SECTION
+  ============================================================ -->
+  <section id="personal-info" aria-labelledby="info-heading">
+
+    <p class="section-label reveal">プロフィール · Profile</p>
+    <h2 class="section-title reveal" id="info-heading">
+      Personal <em>Information</em>
+    </h2>
+
+    <div class="info-grid">
+
+      <!-- Left column: Bio + skills -->
+      <div class="reveal-left">
+        <p class="info-bio">
+          Ani is a passionate anime sketch artist from Uttar Pradesh who has been
+          drawing since childhood. Inspired by iconic anime series and a love for
+          Japanese culture, Ani specialises in character portraits, action scenes,
+          and expressive emotional pieces. Every commission is treated with care —
+          Ani works closely with clients to make sure their vision comes to life
+          on paper (and digitally).
+        </p>
+
+        <h3 class="skills-title">Skills &amp; Interests</h3>
+        <ul class="skills-list" role="list">
+          <li class="skill-tag">Anime Illustration</li>
+          <li class="skill-tag">Character Design</li>
+          <li class="skill-tag">Pencil Sketching</li>
+          <li class="skill-tag">Digital Coloring</li>
+          <li class="skill-tag">Manga Paneling</li>
+          <li class="skill-tag">Portrait Art</li>
+          <li class="skill-tag">Chibi Style</li>
+          <li class="skill-tag">Action Poses</li>
+          <li class="skill-tag">Fan Art</li>
+          <li class="skill-tag">OC Design</li>
+        </ul>
+      </div>
+
+      <!-- Right column: Detail cards -->
+      <div class="info-details reveal-right">
+
+        <div class="info-item">
+          <div class="info-item-icon" aria-hidden="true"><i class="fa-solid fa-user"></i></div>
+          <div>
+            <div class="info-item-label">Name</div>
+            <div class="info-item-value">Ani</div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-item-icon" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></div>
+          <div>
+            <div class="info-item-label">Location</div>
+            <div class="info-item-value">Uttar Pradesh, India</div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-item-icon" aria-hidden="true"><i class="fa-solid fa-palette"></i></div>
+          <div>
+            <div class="info-item-label">Specialty</div>
+            <div class="info-item-value">Anime Sketch Artist</div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-item-icon" aria-hidden="true"><i class="fa-solid fa-language"></i></div>
+          <div>
+            <div class="info-item-label">Languages</div>
+            <div class="info-item-value">Hindi · English</div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-item-icon" aria-hidden="true"><i class="fa-solid fa-clock"></i></div>
+          <div>
+            <div class="info-item-label">Delivery Time</div>
+            <div class="info-item-value">3–5 Business Days</div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-item-icon" aria-hidden="true"><i class="fa-solid fa-star"></i></div>
+          <div>
+            <div class="info-item-label">Commission Status</div>
+            <div class="info-item-value open-badge">Open for Commissions ✦</div>
+          </div>
+        </div>
+
+      </div><!-- /.info-details -->
+    </div><!-- /.info-grid -->
+
+  </section>
+
+
+  <!-- ============================================================
+       CONTACT SECTION
+  ============================================================ -->
+  <section id="contact" aria-labelledby="contact-heading">
+
+    <p class="section-label reveal">お問い合わせ · Get in Touch</p>
+    <h2 class="section-title reveal" id="contact-heading">
+      Commission a <em>Custom Sketch</em>
+    </h2>
+
+    <div class="contact-grid">
+
+      <!-- Left: Info + social links -->
+      <div class="reveal-left">
+        <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:2rem;font-size:0.95rem;">
+          Want a custom anime sketch? Drop me a message describing your idea —
+          a character, scene, style reference, or even a photo. I'll get back
+          to you within 24 hours to discuss the details.
+        </p>
+
+        <p style="color:var(--text-secondary);font-size:0.85rem;margin-bottom:1.5rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">
+          Find me on
+        </p>
+
+        <nav class="social-links" aria-label="Social media links">
+          <a href="#" class="social-link" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i> @ani.sketches
+          </a>
+          <a href="#" class="social-link" aria-label="Twitter / X">
+            <i class="fa-brands fa-x-twitter"></i> @ani_artworld
+          </a>
+          <a href="https://github.com/abhishektech04/animesketch" class="social-link" aria-label="GitHub" target="_blank" rel="noopener">
+            <i class="fa-brands fa-github"></i> abhishektech04/animesketch
+          </a>
+          <a href="mailto:ani@sketchart.in" class="social-link" aria-label="Email">
+            <i class="fa-regular fa-envelope"></i> ani@sketchart.in
+          </a>
+        </nav>
+      </div>
+
+      <!-- Right: Contact form -->
+      <div class="reveal-right">
+        <form class="contact-form" id="contact-form" novalidate>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Yuki Tanaka"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="yuki@example.com"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              placeholder="Custom anime character sketch"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Describe Your Vision</label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Tell me about the character, style, pose, mood — the more detail the better! ✨"
+              required
+            ></textarea>
+          </div>
+
+          <!-- Success banner (shown by script.js after mock submit) -->
+          <div class="form-success" id="form-success" role="alert">
+            <i class="fa-solid fa-circle-check"></i>
+            Message sent! I'll reply within 24 hours. ✨
+          </div>
+
+          <button type="submit" class="btn-submit">
+            <i class="fa-solid fa-paper-plane"></i>
+            Send Message
+          </button>
+
+        </form>
+      </div>
+
+    </div><!-- /.contact-grid -->
+
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <span class="footer-logo">Ani ✦</span>
+    <p>© 2025 Ani — Anime Sketch Artist · Uttar Pradesh, India</p>
+    <p>Crafted with <span style="color:var(--accent)">♥</span></p>
+  </footer>
+
+
+  <!-- ── Portfolio Scripts (loaded after DOM) ── -->
+  <script src="script.js" defer></script>
+
+</body>
+</html>
