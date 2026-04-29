@@ -3,549 +3,242 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ani — Anime Sketch Artist from Uttar Pradesh. Custom anime commissions from $10." />
   <title>Ani — Anime Sketch Artist</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,400&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Scroll progress bar -->
   <div id="scroll-progress" aria-hidden="true"></div>
+  <div id="cursor" aria-hidden="true"><div class="cursor-dot"></div><div class="cursor-ring"></div></div>
 
-  <!-- Custom cursor -->
-  <div id="cursor" aria-hidden="true"></div>
-  <div id="cursor-trail" aria-hidden="true"></div>
-
-  <!-- ══════════════════════════════════════
-       NAVIGATION
-  ══════════════════════════════════════ -->
-  <nav id="navbar" role="navigation" aria-label="Main navigation">
-
-    <div class="nav-logo">
-      Ani <span>Portfolio</span>
+  <!-- LIGHTBOX -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Sketch viewer" hidden>
+    <div class="lb-backdrop"></div>
+    <div class="lb-container">
+      <header class="lb-header">
+        <div class="lb-title-wrap">
+          <span class="lb-counter" id="lb-counter">1 / 9</span>
+          <h3 class="lb-title" id="lb-title">Original Sketch #1</h3>
+        </div>
+        <div class="lb-actions">
+          <button class="lb-btn" id="lb-zoom-out" aria-label="Zoom out"><i class="fa-solid fa-minus"></i></button>
+          <span class="lb-zoom-level" id="lb-zoom-level">100%</span>
+          <button class="lb-btn" id="lb-zoom-in" aria-label="Zoom in"><i class="fa-solid fa-plus"></i></button>
+          <button class="lb-btn" id="lb-zoom-reset" aria-label="Reset zoom"><i class="fa-solid fa-expand"></i></button>
+          <button class="lb-btn lb-close-btn" id="lb-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </header>
+      <div class="lb-stage" id="lb-stage">
+        <button class="lb-nav lb-prev" id="lb-prev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="lb-img-wrap" id="lb-img-wrap">
+          <img src="" alt="" id="lb-img" draggable="false" />
+        </div>
+        <button class="lb-nav lb-next" id="lb-next" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+      <div class="lb-thumbs" id="lb-thumbs" role="list" aria-label="Thumbnails"></div>
     </div>
+  </div>
 
+  <!-- NAVBAR -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <a href="#home" class="nav-logo" aria-label="Ani Portfolio">
+      <span class="logo-mark">A</span><span class="logo-text">ni</span>
+    </a>
     <ul class="nav-links" role="list">
       <li><a href="#home"          class="nav-link active">Home</a></li>
-      <li><a href="#anime-sketch"  class="nav-link">Anime Sketch</a></li>
-      <li><a href="#personal-info" class="nav-link">Personal Info</a></li>
+      <li><a href="#anime-sketch"  class="nav-link">Gallery</a></li>
+      <li><a href="#about"         class="nav-link">About</a></li>
       <li><a href="#contact"       class="nav-link">Contact</a></li>
     </ul>
-
-    <div class="nav-controls">
-      <button id="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle theme">
-        <span class="theme-icon moon"><i class="fa-solid fa-moon"></i></span>
-        <span class="theme-icon sun"><i class="fa-solid fa-sun"></i></span>
+    <div class="nav-right">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <span class="toggle-track">
+          <i class="fa-solid fa-moon toggle-moon"></i>
+          <i class="fa-solid fa-sun toggle-sun"></i>
+          <span class="toggle-thumb"></span>
+        </span>
       </button>
-      <div class="hamburger" id="hamburger" role="button" tabindex="0"
-           aria-label="Toggle mobile menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </div>
+      <a href="#contact" class="nav-cta">Commission</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
     </div>
   </nav>
 
-  <!-- Mobile nav drawer -->
-  <div class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
-    <a href="#home"          class="mobile-nav-link">Home</a>
-    <a href="#anime-sketch"  class="mobile-nav-link">Anime Sketch</a>
-    <a href="#personal-info" class="mobile-nav-link">Personal Info</a>
-    <a href="#contact"       class="mobile-nav-link">Contact</a>
+  <div class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation">
+    <button class="drawer-close" id="drawer-close" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+    <nav>
+      <a href="#home"         class="drawer-link">Home</a>
+      <a href="#anime-sketch" class="drawer-link">Gallery</a>
+      <a href="#about"        class="drawer-link">About</a>
+      <a href="#contact"      class="drawer-link">Contact</a>
+    </nav>
+    <a href="#contact" class="btn-primary drawer-cta">Commission a Sketch</a>
   </div>
+  <div class="drawer-overlay" id="drawer-overlay"></div>
 
-
-  <!-- ══════════════════════════════════════
-       HERO
-  ══════════════════════════════════════ -->
-  <section id="home" aria-labelledby="hero-heading">
-
-    <!-- Animated mesh blobs -->
-    <div class="blob blob-1" aria-hidden="true"></div>
-    <div class="blob blob-2" aria-hidden="true"></div>
-    <div class="blob blob-3" aria-hidden="true"></div>
-
-    <!-- Floating sakura petals injected by script.js -->
-
-    <div class="hero-content">
-
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        ✦ Open for Commissions
-      </div>
-
-      <h1 class="hero-name" id="hero-heading">
-        <span class="hero-hello">Hello, I'm</span>
-        <strong class="hero-big-name">Ani</strong>
-      </h1>
-
-      <p class="hero-tagline">
-        <span id="typewriter-text"></span>
-        <span class="typewriter" aria-hidden="true"></span>
-      </p>
-
-      <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-num">9+</span>
-          <span class="stat-label">Sketches</span>
+  <!-- HERO -->
+  <section id="home" class="hero" aria-labelledby="hero-heading">
+    <div class="hero-ambient" aria-hidden="true">
+      <div class="amb-orb amb-1"></div>
+      <div class="amb-orb amb-2"></div>
+      <div class="amb-orb amb-3"></div>
+      <div class="amb-grid"></div>
+    </div>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="hero-eyebrow reveal-fade" style="--d:0s">
+          <span class="eyebrow-line"></span> Anime Sketch Artist · Uttar Pradesh
+        </p>
+        <h1 class="hero-heading reveal-fade" id="hero-heading" style="--d:0.15s">
+          Hand-crafted<br><em class="hero-em">Anime Art</em><br>just for you.
+        </h1>
+        <p class="hero-body reveal-fade" style="--d:0.3s">
+          <span id="typewriter-text"></span><span class="tw-cursor" aria-hidden="true">|</span>
+        </p>
+        <div class="hero-pills reveal-fade" style="--d:0.45s">
+          <span class="pill"><i class="fa-solid fa-palette"></i> 9 Sketches</span>
+          <span class="pill"><i class="fa-solid fa-tag"></i> From $10</span>
+          <span class="pill"><i class="fa-solid fa-clock"></i> 3–5 Days</span>
         </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-num">$10</span>
-          <span class="stat-label">Per Sketch</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-num">3–5</span>
-          <span class="stat-label">Day Delivery</span>
+        <div class="hero-cta-row reveal-fade" style="--d:0.6s">
+          <a href="#anime-sketch" class="btn-primary"><i class="fa-solid fa-images"></i> View Gallery</a>
+          <a href="#contact" class="btn-ghost">Get a Commission</a>
         </div>
       </div>
-
-      <div class="hero-cta">
-        <a href="#anime-sketch" class="btn-primary">
-          <i class="fa-solid fa-paintbrush"></i>
-          View My Sketches
-          <span class="btn-shimmer"></span>
-        </a>
-        <a href="#contact" class="btn-outline">Commission a Sketch</a>
+      <div class="hero-card reveal-scale" style="--d:0.3s" aria-hidden="true">
+        <div class="hero-card-inner">
+          <img src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/Sketch.1.jpg" alt="" loading="eager" class="hero-card-img"/>
+          <div class="hero-card-badge"><i class="fa-solid fa-star"></i> Featured Work</div>
+          <div class="hero-card-price">$10</div>
+        </div>
+        <div class="hero-card-deco hero-card-deco-1"></div>
+        <div class="hero-card-deco hero-card-deco-2"></div>
       </div>
     </div>
-
-    <p class="scroll-indicator" aria-hidden="true">
-      <span class="scroll-line"></span>
-      Scroll to explore
-    </p>
-
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="scroll-wheel"><div class="scroll-ball"></div></div>
+    </div>
   </section>
 
-  <!-- Wave divider -->
-  <div class="wave-divider" aria-hidden="true">
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path class="wave-path" d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z"/>
-    </svg>
-  </div>
-
-
-  <!-- ══════════════════════════════════════
-       ANIME SKETCH GALLERY  (9 sketches)
-  ══════════════════════════════════════ -->
-  <section id="anime-sketch" aria-labelledby="sketch-heading">
-
-    <div class="sketch-header">
-      <div>
-        <p class="section-label reveal">アニメスケッチ · Anime Sketches</p>
-        <h2 class="section-title reveal" id="sketch-heading">
-          My Sketch <em>Gallery</em>
-        </h2>
-      </div>
-      <div class="price-badge reveal" aria-label="Price: $10 per sketch">
-        <span class="badge-ring"></span>
-        <i class="fa-solid fa-tag"></i>
-        $10 per sketch
-      </div>
+  <!-- GALLERY -->
+  <section id="anime-sketch" class="gallery-section" aria-labelledby="gallery-heading">
+    <div class="section-header reveal-up">
+      <p class="section-eyebrow"><span class="eyebrow-line"></span> Gallery</p>
+      <h2 class="section-title" id="gallery-heading">Original <em>Sketches</em></h2>
+      <p class="section-desc">Click any sketch to open the full viewer — zoom, navigate, and explore every detail.</p>
     </div>
-
-    <!-- 3 × 3 grid — 9 cards -->
-    <div class="sketch-grid" role="list">
-
-      <!-- ── Row 1 ── -->
-      <!-- Card 1 -->
-      <article class="sketch-card reveal" role="listitem" style="transition-delay:0s">
-        <img
-          src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/Sketch.1.jpg"
-          alt="Anime sketch 1 by Ani"
-          loading="lazy"
-        />
-        <div class="sketch-overlay" aria-hidden="true">
-          <div class="sketch-overlay-text">
-            <h4>Original Sketch #1</h4>
-            <p>Custom Sketch · $10</p>
-          </div>
-        </div>
-        <div class="card-shine"></div>
-      </article>
-
-      <!-- Card 2 -->
-      <article class="sketch-card reveal" role="listitem" style="transition-delay:0.08s">
-        <img
-          src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/sketch.2.jpg"
-          alt="Anime sketch 2 by Ani"
-          loading="lazy"
-        />
-        <div class="sketch-overlay" aria-hidden="true">
-          <div class="sketch-overlay-text">
-            <h4>Original Sketch #2</h4>
-            <p>Custom Sketch · $10</p>
-          </div>
-        </div>
-        <div class="card-shine"></div>
-      </article>
-
-      <!-- Card 3 -->
-      <article class="sketch-card reveal" role="listitem" style="transition-delay:0.16s">
-        <img
-          src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/sketch.3.jpg"
-          alt="Anime sketch 3 by Ani"
-          loading="lazy"
-        />
-        <div class="sketch-overlay" aria-hidden="true">
-          <div class="sketch-overlay-text">
-            <h4>Original Sketch #3</h4>
-            <p>Custom Sketch · $10</p>
-          </div>
-        </div>
-        <div class="card-shine"></div>
-      </article>
-
-      <!-- ── Row 2 ── -->
-      <!-- Card 4 -->
-      <article class="sketch-card reveal" role="listitem" style="transition-delay:0.24s">
-        <img
-          src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/sketch.4.jpg"
-          alt="Anime sketch 4 by Ani"
-          loading="lazy"
-        />
-        <div class="sketch-overlay" aria-hidden="true">
-          <div class="sketch-overlay-text">
-            <h4>Original Sketch #4</h4>
-            <p>Custom Sketch · $10</p>
-          </div>
-        </div>
-        <div class="card-shine"></div>
-      </article>
-
-      <!-- Card 5 -->
-      <article class="sketch-card reveal" role="listitem" style="transition-delay:0.32s">
-        <img
-          src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/sketch.5.jpg"
-          alt="Anime sketch 5 by Ani"
-          loading="lazy"
-        />
-        <div class="sketch-overlay" aria-hidden="true">
-          <div class="sketch-overlay-text">
-            <h4>Original Sketch #5</h4>
-            <p>Custom Sketch · $10</p>
-          </div>
-        </div>
-        <div class="card-shine"></div>
-      </article>
-
-      <!-- Card 6 -->
-      <article class="sketch-card reveal" role="listitem" style="transition-delay:0.40s">
-        <img
-          src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/anime.sketch.6.jpg"
-          alt="Anime sketch 6 by Ani"
-          loading="lazy"
-        />
-        <div class="sketch-overlay" aria-hidden="true">
-          <div class="sketch-overlay-text">
-            <h4>Original Sketch #6</h4>
-            <p>Custom Sketch · $10</p>
-          </div>
-        </div>
-        <div class="card-shine"></div>
-      </article>
-
-      <!-- ── Row 3 ── -->
-      <!-- Card 7 -->
-      <article class="sketch-card reveal" role="listitem" style="transition-delay:0.48s">
-        <img
-          src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/anime.sketch.7.jpg"
-          alt="Anime sketch 7 by Ani"
-          loading="lazy"
-        />
-        <div class="sketch-overlay" aria-hidden="true">
-          <div class="sketch-overlay-text">
-            <h4>Original Sketch #7</h4>
-            <p>Custom Sketch · $10</p>
-          </div>
-        </div>
-        <div class="card-shine"></div>
-      </article>
-
-      <!-- Card 8 -->
-      <article class="sketch-card reveal" role="listitem" style="transition-delay:0.56s">
-        <img
-          src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/anime.sketch.8.jpg"
-          alt="Anime sketch 8 by Ani"
-          loading="lazy"
-        />
-        <div class="sketch-overlay" aria-hidden="true">
-          <div class="sketch-overlay-text">
-            <h4>Original Sketch #8</h4>
-            <p>Custom Sketch · $10</p>
-          </div>
-        </div>
-        <div class="card-shine"></div>
-      </article>
-
-      <!-- Card 9 -->
-      <article class="sketch-card reveal" role="listitem" style="transition-delay:0.64s">
-        <img
-          src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/anime.sketch.9.jpg"
-          alt="Anime sketch 9 by Ani"
-          loading="lazy"
-        />
-        <div class="sketch-overlay" aria-hidden="true">
-          <div class="sketch-overlay-text">
-            <h4>Original Sketch #9</h4>
-            <p>Custom Sketch · $10</p>
-          </div>
-        </div>
-        <div class="card-shine"></div>
-      </article>
-
-    </div><!-- /.sketch-grid -->
-
-    <!-- Pricing callout -->
-    <div class="pricing-note reveal" role="note">
-      <div class="price-big" aria-label="Ten dollars">$10</div>
-      <div>
-        <p>
-          <strong>Per Custom Sketch</strong><br>
-          Send a reference or describe your vision — I'll bring your anime
-          character to life with a hand-crafted sketch, delivered digitally
-          within 3–5 days.
-        </p>
-      </div>
-      <div class="pricing-hearts" aria-hidden="true">♥ ♥ ♥</div>
+    <div class="gallery-toolbar reveal-up" style="--d:0.1s">
+      <div class="gallery-count"><span class="count-num">9</span> artworks available</div>
+      <div class="price-pill"><i class="fa-solid fa-tag"></i> $10 per custom sketch</div>
     </div>
-
+    <div class="gallery-grid" id="gallery-grid" role="list" aria-label="Sketch gallery">
+      <article class="gallery-card reveal-up" role="listitem" style="--d:0s"    data-index="0" data-title="Original Sketch #1" tabindex="0" aria-label="Open sketch 1"><div class="card-img-wrap"><img src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/Sketch.1.jpg"        alt="Anime sketch 1" loading="lazy"/><div class="card-overlay"><div class="card-overlay-inner"><i class="fa-solid fa-magnifying-glass-plus"></i><span>View Sketch</span></div></div></div><div class="card-footer"><span class="card-num">#01</span><span class="card-price">$10</span></div></article>
+      <article class="gallery-card reveal-up" role="listitem" style="--d:0.06s" data-index="1" data-title="Original Sketch #2" tabindex="0" aria-label="Open sketch 2"><div class="card-img-wrap"><img src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/sketch.2.jpg"         alt="Anime sketch 2" loading="lazy"/><div class="card-overlay"><div class="card-overlay-inner"><i class="fa-solid fa-magnifying-glass-plus"></i><span>View Sketch</span></div></div></div><div class="card-footer"><span class="card-num">#02</span><span class="card-price">$10</span></div></article>
+      <article class="gallery-card reveal-up" role="listitem" style="--d:0.12s" data-index="2" data-title="Original Sketch #3" tabindex="0" aria-label="Open sketch 3"><div class="card-img-wrap"><img src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/sketch.3.jpg"         alt="Anime sketch 3" loading="lazy"/><div class="card-overlay"><div class="card-overlay-inner"><i class="fa-solid fa-magnifying-glass-plus"></i><span>View Sketch</span></div></div></div><div class="card-footer"><span class="card-num">#03</span><span class="card-price">$10</span></div></article>
+      <article class="gallery-card reveal-up" role="listitem" style="--d:0.18s" data-index="3" data-title="Original Sketch #4" tabindex="0" aria-label="Open sketch 4"><div class="card-img-wrap"><img src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/sketch.4.jpg"         alt="Anime sketch 4" loading="lazy"/><div class="card-overlay"><div class="card-overlay-inner"><i class="fa-solid fa-magnifying-glass-plus"></i><span>View Sketch</span></div></div></div><div class="card-footer"><span class="card-num">#04</span><span class="card-price">$10</span></div></article>
+      <article class="gallery-card reveal-up" role="listitem" style="--d:0.24s" data-index="4" data-title="Original Sketch #5" tabindex="0" aria-label="Open sketch 5"><div class="card-img-wrap"><img src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/sketch.5.jpg"         alt="Anime sketch 5" loading="lazy"/><div class="card-overlay"><div class="card-overlay-inner"><i class="fa-solid fa-magnifying-glass-plus"></i><span>View Sketch</span></div></div></div><div class="card-footer"><span class="card-num">#05</span><span class="card-price">$10</span></div></article>
+      <article class="gallery-card reveal-up" role="listitem" style="--d:0.3s"  data-index="5" data-title="Original Sketch #6" tabindex="0" aria-label="Open sketch 6"><div class="card-img-wrap"><img src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/anime.sketch.6.jpg"   alt="Anime sketch 6" loading="lazy"/><div class="card-overlay"><div class="card-overlay-inner"><i class="fa-solid fa-magnifying-glass-plus"></i><span>View Sketch</span></div></div></div><div class="card-footer"><span class="card-num">#06</span><span class="card-price">$10</span></div></article>
+      <article class="gallery-card reveal-up" role="listitem" style="--d:0.36s" data-index="6" data-title="Original Sketch #7" tabindex="0" aria-label="Open sketch 7"><div class="card-img-wrap"><img src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/anime.sketch.7.jpg"   alt="Anime sketch 7" loading="lazy"/><div class="card-overlay"><div class="card-overlay-inner"><i class="fa-solid fa-magnifying-glass-plus"></i><span>View Sketch</span></div></div></div><div class="card-footer"><span class="card-num">#07</span><span class="card-price">$10</span></div></article>
+      <article class="gallery-card reveal-up" role="listitem" style="--d:0.42s" data-index="7" data-title="Original Sketch #8" tabindex="0" aria-label="Open sketch 8"><div class="card-img-wrap"><img src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/anime.sketch.8.jpg"   alt="Anime sketch 8" loading="lazy"/><div class="card-overlay"><div class="card-overlay-inner"><i class="fa-solid fa-magnifying-glass-plus"></i><span>View Sketch</span></div></div></div><div class="card-footer"><span class="card-num">#08</span><span class="card-price">$10</span></div></article>
+      <article class="gallery-card reveal-up" role="listitem" style="--d:0.48s" data-index="8" data-title="Original Sketch #9" tabindex="0" aria-label="Open sketch 9"><div class="card-img-wrap"><img src="https://github.com/abhishektech04/animesketch/releases/download/video%26image/anime.sketch.9.jpg"   alt="Anime sketch 9" loading="lazy"/><div class="card-overlay"><div class="card-overlay-inner"><i class="fa-solid fa-magnifying-glass-plus"></i><span>View Sketch</span></div></div></div><div class="card-footer"><span class="card-num">#09</span><span class="card-price">$10</span></div></article>
+    </div>
+    <div class="commission-banner reveal-up" style="--d:0.2s">
+      <div class="commission-left">
+        <p class="commission-label">Want your own?</p>
+        <h3 class="commission-title">Custom sketch — <em>$10</em></h3>
+        <p class="commission-sub">Delivered digitally in 3–5 business days</p>
+      </div>
+      <a href="#contact" class="btn-primary commission-cta">Order Now <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
   </section>
 
-  <!-- Wave divider (flipped) -->
-  <div class="wave-divider wave-flip" aria-hidden="true">
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path class="wave-path-2" d="M0,40 C360,0 720,80 1080,40 C1260,20 1380,60 1440,40 L1440,0 L0,0 Z"/>
-    </svg>
-  </div>
-
-
-  <!-- ══════════════════════════════════════
-       PERSONAL IMAGE
-  ══════════════════════════════════════ -->
-  <section id="personal-image" aria-label="About Ani">
-
-    <div class="personal-image-wrapper reveal-left">
-      <div class="orbit orbit-1" aria-hidden="true"></div>
-      <div class="orbit orbit-2" aria-hidden="true"></div>
-      <img
-        src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=700&q=85"
-        alt="Ani — Anime Sketch Artist from Uttar Pradesh"
-      />
-      <div class="img-badge">
-        <i class="fa-solid fa-palette"></i> Artist
+  <!-- ABOUT -->
+  <section id="about" class="about-section" aria-labelledby="about-heading">
+    <div class="about-img-col reveal-left">
+      <div class="about-img-frame">
+        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=700&q=80" alt="Ani — Anime Sketch Artist" loading="lazy"/>
+        <div class="about-img-tag"><i class="fa-solid fa-palette"></i><span>Sketch Artist</span></div>
       </div>
     </div>
-
-    <div class="personal-image-text reveal-right">
-      <p class="section-label">の · Meet the Artist</p>
-      <h2 class="section-title">
-        The Face Behind<br>the <em>Sketches</em>
-      </h2>
-      <blockquote class="quote">
-        "Every line I draw is a story waiting to be told."
-      </blockquote>
-      <p style="color:var(--text-secondary);line-height:1.9;margin-bottom:1.5rem;font-size:0.95rem;">
-        Ani is a self-taught anime sketch artist from the heart of Uttar Pradesh,
-        India. Inspired by the expressive worlds of classic and modern anime, Ani
-        channels emotion, movement, and story into every hand-drawn piece.
-      </p>
-      <a href="#contact" class="btn-primary"
-         style="display:inline-flex;align-items:center;gap:0.5rem;">
-        <i class="fa-regular fa-envelope"></i> Commission a Sketch
-        <span class="btn-shimmer"></span>
-      </a>
+    <div class="about-text-col reveal-right">
+      <p class="section-eyebrow"><span class="eyebrow-line"></span> About Me</p>
+      <h2 class="section-title" id="about-heading">The artist behind<br>the <em>ink</em></h2>
+      <p class="about-body">I'm Ani — a self-taught anime sketch artist from Uttar Pradesh, India. Since childhood, I've been captivated by the expressive depth of anime art. Each commission is a story I get to tell through pencil and ink, working closely with you to bring your vision to life.</p>
+      <blockquote class="about-quote">"Every line is a decision. Every sketch is a conversation."</blockquote>
+      <div class="about-stats">
+        <div class="astat"><span class="astat-num">9+</span><span class="astat-label">Gallery Pieces</span></div>
+        <div class="astat-div"></div>
+        <div class="astat"><span class="astat-num">$10</span><span class="astat-label">Starting Price</span></div>
+        <div class="astat-div"></div>
+        <div class="astat"><span class="astat-num">5★</span><span class="astat-label">Satisfaction</span></div>
+      </div>
+      <div class="skills-wrap">
+        <span class="skill-chip">Anime Illustration</span><span class="skill-chip">Character Design</span>
+        <span class="skill-chip">Pencil Sketching</span><span class="skill-chip">Digital Coloring</span>
+        <span class="skill-chip">Manga Paneling</span><span class="skill-chip">Portrait Art</span>
+        <span class="skill-chip">Chibi Style</span><span class="skill-chip">Action Poses</span>
+        <span class="skill-chip">Fan Art</span><span class="skill-chip">OC Design</span>
+      </div>
     </div>
-
   </section>
 
-
-  <!-- ══════════════════════════════════════
-       PERSONAL INFORMATION
-  ══════════════════════════════════════ -->
-  <section id="personal-info" aria-labelledby="info-heading">
-
-    <!-- Floating decorative petals -->
-    <div class="section-petal p1" aria-hidden="true">🌸</div>
-    <div class="section-petal p2" aria-hidden="true">🌺</div>
-    <div class="section-petal p3" aria-hidden="true">✿</div>
-
-    <p class="section-label reveal">プロフィール · Profile</p>
-    <h2 class="section-title reveal" id="info-heading">
-      Personal <em>Information</em>
-    </h2>
-
-    <div class="info-grid">
-
-      <!-- Left: bio + skills -->
-      <div class="reveal-left">
-        <p class="info-bio">
-          Ani is a passionate anime sketch artist from Uttar Pradesh who has been
-          drawing since childhood. Inspired by iconic anime series and a love for
-          Japanese culture, Ani specialises in character portraits, action scenes,
-          and expressive emotional pieces. Every commission is treated with care —
-          Ani works closely with clients to make sure their vision comes to life
-          on paper (and digitally).
-        </p>
-
-        <h3 class="skills-title">Skills &amp; Interests</h3>
-        <ul class="skills-list" role="list">
-          <li class="skill-tag" style="--si:0">Anime Illustration</li>
-          <li class="skill-tag" style="--si:1">Character Design</li>
-          <li class="skill-tag" style="--si:2">Pencil Sketching</li>
-          <li class="skill-tag" style="--si:3">Digital Coloring</li>
-          <li class="skill-tag" style="--si:4">Manga Paneling</li>
-          <li class="skill-tag" style="--si:5">Portrait Art</li>
-          <li class="skill-tag" style="--si:6">Chibi Style</li>
-          <li class="skill-tag" style="--si:7">Action Poses</li>
-          <li class="skill-tag" style="--si:8">Fan Art</li>
-          <li class="skill-tag" style="--si:9">OC Design</li>
-        </ul>
-      </div>
-
-      <!-- Right: detail cards -->
-      <div class="info-details reveal-right">
-
-        <div class="info-item">
-          <div class="info-item-icon"><i class="fa-solid fa-user"></i></div>
-          <div><div class="info-item-label">Name</div><div class="info-item-value">Ani</div></div>
-        </div>
-
-        <div class="info-item">
-          <div class="info-item-icon"><i class="fa-solid fa-location-dot"></i></div>
-          <div><div class="info-item-label">Location</div><div class="info-item-value">Uttar Pradesh, India</div></div>
-        </div>
-
-        <div class="info-item">
-          <div class="info-item-icon"><i class="fa-solid fa-palette"></i></div>
-          <div><div class="info-item-label">Specialty</div><div class="info-item-value">Anime Sketch Artist</div></div>
-        </div>
-
-        <div class="info-item">
-          <div class="info-item-icon"><i class="fa-solid fa-language"></i></div>
-          <div><div class="info-item-label">Languages</div><div class="info-item-value">Hindi · English</div></div>
-        </div>
-
-        <div class="info-item">
-          <div class="info-item-icon"><i class="fa-solid fa-clock"></i></div>
-          <div><div class="info-item-label">Delivery Time</div><div class="info-item-value">3–5 Business Days</div></div>
-        </div>
-
-        <div class="info-item">
-          <div class="info-item-icon"><i class="fa-solid fa-star"></i></div>
-          <div>
-            <div class="info-item-label">Commission Status</div>
-            <div class="info-item-value open-badge">Open for Commissions ✦</div>
-          </div>
-        </div>
-
-      </div><!-- /.info-details -->
-    </div><!-- /.info-grid -->
-
+  <!-- INFO CARDS -->
+  <section class="info-section" aria-label="Artist information">
+    <div class="info-cards">
+      <div class="info-card reveal-up" style="--d:0s">   <div class="info-card-icon"><i class="fa-solid fa-user"></i></div><div class="info-card-label">Name</div><div class="info-card-value">Ani</div></div>
+      <div class="info-card reveal-up" style="--d:0.08s"><div class="info-card-icon"><i class="fa-solid fa-location-dot"></i></div><div class="info-card-label">Location</div><div class="info-card-value">Uttar Pradesh, India</div></div>
+      <div class="info-card reveal-up" style="--d:0.16s"><div class="info-card-icon"><i class="fa-solid fa-palette"></i></div><div class="info-card-label">Specialty</div><div class="info-card-value">Anime Sketch</div></div>
+      <div class="info-card reveal-up" style="--d:0.24s"><div class="info-card-icon"><i class="fa-solid fa-language"></i></div><div class="info-card-label">Languages</div><div class="info-card-value">Hindi · English</div></div>
+      <div class="info-card reveal-up" style="--d:0.32s"><div class="info-card-icon"><i class="fa-solid fa-clock"></i></div><div class="info-card-label">Delivery</div><div class="info-card-value">3–5 Business Days</div></div>
+      <div class="info-card reveal-up open-card" style="--d:0.4s"><div class="info-card-icon"><i class="fa-solid fa-circle-check"></i></div><div class="info-card-label">Status</div><div class="info-card-value">Open for Commissions</div><div class="open-pulse"></div></div>
+    </div>
   </section>
 
-
-  <!-- ══════════════════════════════════════
-       CONTACT
-  ══════════════════════════════════════ -->
-  <section id="contact" aria-labelledby="contact-heading">
-
-    <p class="section-label reveal">お問い合わせ · Get in Touch</p>
-    <h2 class="section-title reveal" id="contact-heading">
-      Commission a <em>Custom Sketch</em>
-    </h2>
-
-    <div class="contact-grid">
-
-      <!-- Left: social links -->
-      <div class="reveal-left">
-        <p style="color:var(--text-secondary);line-height:1.9;margin-bottom:2rem;font-size:0.95rem;">
-          Want a custom anime sketch? Drop me a message describing your idea —
-          a character, scene, style reference, or even a photo. I'll get back
-          to you within 24 hours to discuss the details.
-        </p>
-        <p style="color:var(--text-secondary);font-size:0.72rem;margin-bottom:1.2rem;
-                  font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">
-          Find me on
-        </p>
-
-        <nav class="social-links" aria-label="Social media links">
-          <a href="#" class="social-link" aria-label="Instagram">
-            <i class="fa-brands fa-instagram"></i> @ani.sketches
-          </a>
-          <a href="#" class="social-link" aria-label="Twitter / X">
-            <i class="fa-brands fa-x-twitter"></i> @ani_artworld
-          </a>
-          <a href="https://github.com/abhishektech04/animesketch"
-             class="social-link" aria-label="GitHub"
-             target="_blank" rel="noopener">
-            <i class="fa-brands fa-github"></i> abhishektech04/animesketch
-          </a>
-          <a href="mailto:ani@sketchart.in" class="social-link" aria-label="Email">
-            <i class="fa-regular fa-envelope"></i> ani@sketchart.in
-          </a>
-        </nav>
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section" aria-labelledby="contact-heading">
+    <div class="contact-inner">
+      <div class="contact-left reveal-left">
+        <p class="section-eyebrow"><span class="eyebrow-line"></span> Get in Touch</p>
+        <h2 class="section-title" id="contact-heading">Let's create<br>something <em>beautiful</em></h2>
+        <p class="contact-body">Describe your dream character, scene, or style — I'll bring it to life. Replies within 24 hours.</p>
+        <div class="social-stack">
+          <a href="#" class="social-row"><div class="social-icon"><i class="fa-brands fa-instagram"></i></div><div class="social-info"><span class="social-platform">Instagram</span><span class="social-handle">@ani.sketches</span></div><i class="fa-solid fa-arrow-up-right-from-square social-arrow"></i></a>
+          <a href="#" class="social-row"><div class="social-icon"><i class="fa-brands fa-x-twitter"></i></div><div class="social-info"><span class="social-platform">Twitter / X</span><span class="social-handle">@ani_artworld</span></div><i class="fa-solid fa-arrow-up-right-from-square social-arrow"></i></a>
+          <a href="https://github.com/abhishektech04/animesketch" class="social-row" target="_blank" rel="noopener"><div class="social-icon"><i class="fa-brands fa-github"></i></div><div class="social-info"><span class="social-platform">GitHub</span><span class="social-handle">abhishektech04</span></div><i class="fa-solid fa-arrow-up-right-from-square social-arrow"></i></a>
+          <a href="mailto:ani@sketchart.in" class="social-row"><div class="social-icon"><i class="fa-regular fa-envelope"></i></div><div class="social-info"><span class="social-platform">Email</span><span class="social-handle">ani@sketchart.in</span></div><i class="fa-solid fa-arrow-up-right-from-square social-arrow"></i></a>
+        </div>
       </div>
-
-      <!-- Right: contact form -->
-      <div class="reveal-right">
+      <div class="contact-right reveal-right">
         <form class="contact-form" id="contact-form" novalidate>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="name">Your Name</label>
-              <input type="text" id="name" name="name"
-                     placeholder="Yuki Tanaka" required/>
-            </div>
-            <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" id="email" name="email"
-                     placeholder="yuki@example.com" required/>
-            </div>
+          <div class="form-duo">
+            <div class="field-wrap"><label for="cf-name">Your Name</label><input type="text" id="cf-name" name="name" placeholder="Yuki Tanaka" required/><span class="field-line"></span></div>
+            <div class="field-wrap"><label for="cf-email">Email</label><input type="email" id="cf-email" name="email" placeholder="yuki@example.com" required/><span class="field-line"></span></div>
           </div>
-
-          <div class="form-group">
-            <label for="subject">Subject</label>
-            <input type="text" id="subject" name="subject"
-                   placeholder="Custom anime character sketch"/>
-          </div>
-
-          <div class="form-group">
-            <label for="message">Describe Your Vision</label>
-            <textarea id="message" name="message"
-              placeholder="Tell me about the character, style, pose, mood — the more detail the better! ✨"
-              required></textarea>
-          </div>
-
-          <div class="form-success" id="form-success" role="alert">
-            <i class="fa-solid fa-circle-check"></i>
-            Message sent! I'll reply within 24 hours. ✨
-          </div>
-
-          <button type="submit" class="btn-submit">
-            <i class="fa-solid fa-paper-plane"></i>
-            Send Message
-            <span class="btn-shimmer"></span>
-          </button>
-
+          <div class="field-wrap"><label for="cf-subject">Subject</label><input type="text" id="cf-subject" name="subject" placeholder="Custom anime character"/><span class="field-line"></span></div>
+          <div class="field-wrap"><label for="cf-message">Describe Your Vision</label><textarea id="cf-message" name="message" rows="5" placeholder="Character details, art style, pose, mood… the more the better ✨" required></textarea><span class="field-line"></span></div>
+          <div class="form-success" id="form-success" role="alert" hidden><i class="fa-solid fa-circle-check"></i> Message sent! I'll reply within 24 hours ✨</div>
+          <button type="submit" class="btn-primary btn-submit" id="submit-btn"><span class="btn-label">Send Message</span><span class="btn-icon"><i class="fa-solid fa-paper-plane"></i></span></button>
         </form>
       </div>
-
-    </div><!-- /.contact-grid -->
-
+    </div>
   </section>
 
-
-  <!-- ══════════════════════════════════════
-       FOOTER
-  ══════════════════════════════════════ -->
-  <footer>
-    <span class="footer-logo">Ani ✦</span>
-    <p>© 2025 Ani — Anime Sketch Artist · Uttar Pradesh, India</p>
-    <p>Crafted with <span class="heart-beat">♥</span></p>
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><span class="footer-logo">Ani</span><p>Anime Sketch Artist · Uttar Pradesh, India</p></div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="#home">Home</a><a href="#anime-sketch">Gallery</a><a href="#about">About</a><a href="#contact">Contact</a>
+      </nav>
+      <p class="footer-copy">© 2025 Ani — All rights reserved · Made with <span class="hb">♥</span></p>
+    </div>
   </footer>
 
   <script src="script.js" defer></script>
